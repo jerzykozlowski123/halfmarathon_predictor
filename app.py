@@ -63,7 +63,12 @@ if 'submitted' not in st.session_state:
 def on_button_click():
     st.session_state.submitted = True
 
-df = pd.read_csv(f"s3://{BUCKET_NAME}/halfmarathons/dane_biegaczy.csv", sep=";")
+@st.cache_resource
+def get_data():
+    df = pd.read_csv(f"s3://{BUCKET_NAME}/halfmarathons/dane_biegaczy.csv", sep=";")
+    return df
+
+df = get_data()
 
 opis = st.text_area("Przedstaw się i powiedz jaka jest twoja płeć, wiek i poziom sportowy lub doświadczenie biegowe:")
 
