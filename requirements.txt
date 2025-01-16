@@ -1,0 +1,6 @@
+streamlit
+pandas
+python-dotenv
+langfuse.decorators
+langfuse.openai
+boto3
