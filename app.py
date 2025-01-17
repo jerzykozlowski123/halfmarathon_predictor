@@ -7,7 +7,7 @@ from langfuse.decorators import observe
 from langfuse.openai import OpenAI
 import boto3
 
-st.set_page_config("Szklana kula AI", menu_items={"About": "Szklan kula AI - Półmaraton by JK"})
+st.set_page_config("Szklana kula AI", menu_items={"About": "Szklana kula AI - Półmaraton by JK"})
 st.title('Szklana Kula AI - Półmaraton')
 
 load_dotenv()
