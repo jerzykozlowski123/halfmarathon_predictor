@@ -106,7 +106,7 @@ if st.session_state.submitted:
     poziom = st.slider("Poziom wytrenowania:", min_value=1, max_value=10, value=dane_biegacza["poziom"] or 5)
 
     if wiek < 20:
-        user_category = f"K20" if plec == "K" else f"M20"
+        user_category = "K20" if plec == "K" else "M20"
     else:
         user_category = f"K{wiek // 10 * 10}" if plec == "K" else f"M{wiek // 10 * 10}"
 
