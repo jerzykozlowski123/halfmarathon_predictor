@@ -3,5 +3,6 @@ pandas
 python-dotenv
 openai
 langfuse
-boto3==1.35.99
 fsspec
+s3fs
+boto3==1.35.99
