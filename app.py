@@ -12,7 +12,7 @@ st.title('Szklana Kula AI - Półmaraton')
 
 load_dotenv()
 
-openai_api_key = os.getenv("OPENAI_API_KEY") # To chyba to
+openai_api_key = os.getenv("OPENAI_API_KEY")
 openai_client = OpenAI(api_key=openai_api_key)
 
 s3 = boto3.client(
@@ -75,14 +75,14 @@ opis = st.text_area("Przedstaw się i powiedz jaka jest twoja płeć, wiek i poz
 
 biegacze_grupy = {
     10: {"nazwa": "Mistrzem", "opis": "Biegacze, którzy osiągają doskonałe wyniki. Trenują intensywnie i regularnie, przechodząc przez zaawansowane techniki treningowe. Ich czas na półmaratonie jest naprawdę imponujący, a każdy bieg to dla nich wyzwanie na najwyższym poziomie."},
-    9: {"nazwa": "Zaawansowanym", "opis": "Osoby, które biegają na bardzo wysokim poziomie, trenują z planem i wyniki są bliskie czołowej części stawki. Wiedzą, jak osiągać swoje cele treningowe, i mają doświadczenie w rywalizacji na różnych dystansach."},
+    9: {"nazwa": "Zaawansowanym", "opis": "Osoby, które biegają na bardzo wysokim poziomie, trenują z planem ich wyniki są bliskie czołowej części stawki. Wiedzą, jak osiągać swoje cele treningowe i mają doświadczenie w rywalizacji na różnych dystansach."},
     8: {"nazwa": "Treningowcem", "opis": "Biegacze, którzy osiągają solidne wyniki, regularnie biegają, trenują w systemie i podchodzą do półmaratonu z odpowiednią motywacją. Mają duże doświadczenie, choć jeszcze nie są w ścisłej czołówce."},
     7: {"nazwa": "Ambitnym Biegaczem", "opis": "Ci, którzy traktują bieganie jako ważną część swojego życia. Trenują regularnie, choć niekoniecznie w pełni profesjonalnie. Zawsze dążą do poprawy swoich wyników i cieszą się z osiągnięć."},
     6: {"nazwa": "Zaawansowanym Amatorem", "opis": "Biegacze, którzy systematycznie pracują nad poprawą wyników, ale nie są zawodowcami. Ich treningi mają na celu poprawę kondycji i wytrzymałości, z uwagą na szczegóły."},
     5: {"nazwa": "Zdeterminowany", "opis": "Ci, którzy traktują półmaraton jako duże wyzwanie. Często biegają, ale ich treningi mogą być mniej regularne. Niezależnie od wyników, mają silną wolę i dążą do samodoskonalenia."},
     4: {"nazwa": "Biegaczem Na Start", "opis": "Amatorzy, którzy rozpoczęli swoją biegową przygodę. Ich treningi są wciąż na etapie budowania bazy, ale wytrwale pracują nad poprawą wyników. Ich celem jest ukończenie półmaratonu w dobrym czasie."},
     3: {"nazwa": "Mocnym Pod Prąd", "opis": "Osoby, które traktują każdy bieg jako osobne wyzwanie. Często stawiają na treningi, ale ich wyniki jeszcze nie są imponujące. Mają silną wolę i nie boją się trudności."},
-    2: {"nazwa": "Nowym Biegaczem", "opis": "Ci, którzy dopiero zaczynają swoją przygodę z bieganiem. Ich treningi są sporadyczne, ale ich zaangażowanie jest duże. Cieszą się z każdego przebiegniętego kilometra i dążą do ukończenia półmaratonu."},
+    2: {"nazwa": "Nowym Biegaczem", "opis": "Ci, którzy dopiero zaczynają swoją przygodę z bieganiem. Ich treningi są sporadyczne, ale ich zaangażowanie jest duże. Cieszą się z każdego przebiegniętego kilometra i dążą do ukończenia biegu."},
     1: {"nazwa": "Wychodzącym z Strefy Komfortu", "opis": "Biegacze, którzy zaczynają biegać zaledwie od kilku miesięcy. Trenują na początku, próbując pokonać swoje słabości. Są na etapie budowania kondycji i nie spodziewają się jeszcze rewelacyjnych wyników, ale dążą do pokonania własnych granic."},
 }
 
