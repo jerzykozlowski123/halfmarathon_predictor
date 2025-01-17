@@ -1,6 +1,6 @@
 streamlit
 pandas
 python-dotenv
-langfuse.decorators
-langfuse.openai
+openai
+langfuse
 boto3
