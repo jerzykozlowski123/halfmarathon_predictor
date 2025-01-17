@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import os
-from dotenv import dotenv_values, load_dotenv
+from dotenv import load_dotenv
 from langfuse.decorators import observe
 from langfuse.openai import OpenAI
 import boto3
