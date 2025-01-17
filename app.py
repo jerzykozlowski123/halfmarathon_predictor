@@ -74,16 +74,16 @@ df = get_data()
 opis = st.text_area("Przedstaw się i powiedz jaka jest twoja płeć, wiek i poziom sportowy lub doświadczenie biegowe:")
 
 biegacze_grupy = {
-    10: {"nazwa": "Mistrzowie", "opis": "Biegacze, którzy osiągają doskonałe wyniki. Trenują intensywnie i regularnie, przechodząc przez zaawansowane techniki treningowe. Ich czas na półmaratonie jest naprawdę imponujący, a każdy bieg to dla nich wyzwanie na najwyższym poziomie."},
-    9: {"nazwa": "Zaawansowani", "opis": "Osoby, które biegają na bardzo wysokim poziomie, trenują z planem i wyniki są bliskie czołowej części stawki. Wiedzą, jak osiągać swoje cele treningowe, i mają doświadczenie w rywalizacji na różnych dystansach."},
-    8: {"nazwa": "Treningowcy", "opis": "Biegacze, którzy osiągają solidne wyniki, regularnie biegają, trenują w systemie i podchodzą do półmaratonu z odpowiednią motywacją. Mają duże doświadczenie, choć jeszcze nie są w ścisłej czołówce."},
-    7: {"nazwa": "Ambitni Biegacze", "opis": "Ci, którzy traktują bieganie jako ważną część swojego życia. Trenują regularnie, choć niekoniecznie w pełni profesjonalnie. Zawsze dążą do poprawy swoich wyników i cieszą się z osiągnięć."},
-    6: {"nazwa": "Zaawansowani Amatorzy", "opis": "Biegacze, którzy systematycznie pracują nad poprawą wyników, ale nie są zawodowcami. Ich treningi mają na celu poprawę kondycji i wytrzymałości, z uwagą na szczegóły."},
-    5: {"nazwa": "Zdeterminowani", "opis": "Ci, którzy traktują półmaraton jako duże wyzwanie. Często biegają, ale ich treningi mogą być mniej regularne. Niezależnie od wyników, mają silną wolę i dążą do samodoskonalenia."},
-    4: {"nazwa": "Biegacze Na Start", "opis": "Amatorzy, którzy rozpoczęli swoją biegową przygodę. Ich treningi są wciąż na etapie budowania bazy, ale wytrwale pracują nad poprawą wyników. Ich celem jest ukończenie półmaratonu w dobrym czasie."},
-    3: {"nazwa": "Mocni Pod Prąd", "opis": "Osoby, które traktują każdy bieg jako osobne wyzwanie. Często stawiają na treningi, ale ich wyniki jeszcze nie są imponujące. Mają silną wolę i nie boją się trudności."},
-    2: {"nazwa": "Nowi Biegacze", "opis": "Ci, którzy dopiero zaczynają swoją przygodę z bieganiem. Ich treningi są sporadyczne, ale ich zaangażowanie jest duże. Cieszą się z każdego przebiegniętego kilometra i dążą do ukończenia półmaratonu."},
-    1: {"nazwa": "Wychodzący z Strefy Komfortu", "opis": "Biegacze, którzy zaczynają biegać zaledwie od kilku miesięcy. Trenują na początku, próbując pokonać swoje słabości. Są na etapie budowania kondycji i nie spodziewają się jeszcze rewelacyjnych wyników, ale dążą do pokonania własnych granic."},
+    10: {"nazwa": "Mistrzem", "opis": "Biegacze, którzy osiągają doskonałe wyniki. Trenują intensywnie i regularnie, przechodząc przez zaawansowane techniki treningowe. Ich czas na półmaratonie jest naprawdę imponujący, a każdy bieg to dla nich wyzwanie na najwyższym poziomie."},
+    9: {"nazwa": "Zaawansowanym", "opis": "Osoby, które biegają na bardzo wysokim poziomie, trenują z planem i wyniki są bliskie czołowej części stawki. Wiedzą, jak osiągać swoje cele treningowe, i mają doświadczenie w rywalizacji na różnych dystansach."},
+    8: {"nazwa": "Treningowcem", "opis": "Biegacze, którzy osiągają solidne wyniki, regularnie biegają, trenują w systemie i podchodzą do półmaratonu z odpowiednią motywacją. Mają duże doświadczenie, choć jeszcze nie są w ścisłej czołówce."},
+    7: {"nazwa": "Ambitnym Biegaczem", "opis": "Ci, którzy traktują bieganie jako ważną część swojego życia. Trenują regularnie, choć niekoniecznie w pełni profesjonalnie. Zawsze dążą do poprawy swoich wyników i cieszą się z osiągnięć."},
+    6: {"nazwa": "Zaawansowanym Amatorem", "opis": "Biegacze, którzy systematycznie pracują nad poprawą wyników, ale nie są zawodowcami. Ich treningi mają na celu poprawę kondycji i wytrzymałości, z uwagą na szczegóły."},
+    5: {"nazwa": "Zdeterminowany", "opis": "Ci, którzy traktują półmaraton jako duże wyzwanie. Często biegają, ale ich treningi mogą być mniej regularne. Niezależnie od wyników, mają silną wolę i dążą do samodoskonalenia."},
+    4: {"nazwa": "Biegaczem Na Start", "opis": "Amatorzy, którzy rozpoczęli swoją biegową przygodę. Ich treningi są wciąż na etapie budowania bazy, ale wytrwale pracują nad poprawą wyników. Ich celem jest ukończenie półmaratonu w dobrym czasie."},
+    3: {"nazwa": "Mocnym Pod Prąd", "opis": "Osoby, które traktują każdy bieg jako osobne wyzwanie. Często stawiają na treningi, ale ich wyniki jeszcze nie są imponujące. Mają silną wolę i nie boją się trudności."},
+    2: {"nazwa": "Nowym Biegaczem", "opis": "Ci, którzy dopiero zaczynają swoją przygodę z bieganiem. Ich treningi są sporadyczne, ale ich zaangażowanie jest duże. Cieszą się z każdego przebiegniętego kilometra i dążą do ukończenia półmaratonu."},
+    1: {"nazwa": "Wychodzącym z Strefy Komfortu", "opis": "Biegacze, którzy zaczynają biegać zaledwie od kilku miesięcy. Trenują na początku, próbując pokonać swoje słabości. Są na etapie budowania kondycji i nie spodziewają się jeszcze rewelacyjnych wyników, ale dążą do pokonania własnych granic."},
 }
 
 # Przycisk, który ustawia stan 'submitted'
@@ -101,9 +101,9 @@ if st.session_state.submitted:
     # Użytkownik wybiera dane
     st.subheader("Sprawdź i popraw swoje dane:")
 
-    wiek = st.number_input("Podaj swój wiek:", min_value=16, max_value=100, step=1, value=dane_biegacza["wiek"] or 32)
-    plec = st.selectbox("Podaj swoją płeć:", ["Kobieta", "Mężczyzna"], index=0 if dane_biegacza["plec"] == "K" else 1)
-    poziom = st.slider("Podaj swój poziom wytrenowania:", min_value=1, max_value=10, value=dane_biegacza["poziom"] or 5)
+    wiek = st.number_input("Wiek:", min_value=16, max_value=100, step=1, value=dane_biegacza["wiek"] or 32)
+    plec = st.selectbox("Płeć:", ["Kobieta", "Mężczyzna"], index=0 if dane_biegacza["plec"] == "K" else 1)
+    poziom = st.slider("Poziom wytrenowania:", min_value=1, max_value=10, value=dane_biegacza["poziom"] or 5)
 
     if wiek < 20:
         user_category = f"K20" if plec == "K" else f"M20"
@@ -125,7 +125,7 @@ if st.session_state.submitted:
         avg_5km_s = int(avg_5km % 60)
 
         grupa = biegacze_grupy[poziom]
-        st.subheader(f"Grupa: {grupa['nazwa']}")
+        st.subheader(f"Według AI jesteś {grupa['nazwa']}")
         st.write(grupa['opis'])
 
         col1, col2 = st.columns(2)
@@ -139,3 +139,32 @@ if st.session_state.submitted:
         st.warning("Brak danych dla wybranego wieku, płci i poziomu wytrenowania.")
 else:
     st.write("")
+
+# Footer
+footer_style = """
+    <style>
+        .footer {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            border-top: 1px solid #e7e7e7;
+            color: inherit;
+        }
+        body {
+            padding-bottom: 50px;  /* Zapewnienie miejsca na stopkę */
+        }
+    </style>
+"""
+
+footer_html = """
+<div class="footer">
+    <p>Contact: Jerzy Kozlowski | <a href="mailto:jerzykozlowski@mailmix.pl">jerzykozlowski@mailmix.pl</a></p>
+</div>
+"""
+
+st.markdown(footer_style, unsafe_allow_html=True)
+st.markdown(footer_html, unsafe_allow_html=True)
