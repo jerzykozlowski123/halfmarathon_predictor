@@ -11,8 +11,9 @@ st.set_page_config("Szklana kula AI", menu_items={"About": "Szklan kula AI - Pó
 st.title('Szklana Kula AI - Półmaraton')
 
 load_dotenv()
-env = dotenv_values(".env")
-openai_client = OpenAI(api_key=env["OPENAI_API_KEY"])
+
+openai_api_key = os.getenv("OPENAI_API_KEY") # To chyba to
+openai_client = OpenAI(api_key=openai_api_key)
 
 s3 = boto3.client(
     "s3",
