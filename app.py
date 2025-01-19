@@ -8,7 +8,12 @@ from langfuse.openai import OpenAI
 import boto3
 
 st.set_page_config("Szklana kula AI", menu_items={"About": "Szklana kula AI - Półmaraton by JK"})
-st.title('Szklana Kula AI - Półmaraton')
+col1, col2 = st.columns([6,1])
+with col1:
+    st.title('Szklana Kula AI - Półmaraton')
+with col2:
+    st.image("biegacze.jpg", use_container_width=True)
+
 
 load_dotenv()
 
