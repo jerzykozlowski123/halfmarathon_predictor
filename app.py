@@ -30,33 +30,86 @@ def generate_description(opis):
     AI generuje parametry dla biegacza
     """
     try:
-        messages = [
+        # Wyodrębnij płeć
+        messages_plec = [
             {
                 "role": "system",
                 "content": """ 
-                    Wyłuskaj z tekstu: płeć ('K' dla kobiety, 'M' dla mężczyzny), wiek (liczba) oraz poziom sportowy (1-10). 
-                    Brakujące informacje podaj jako 'None'. 
-                    Odpowiedź w formacie JSON, wzór: {"plec": "K", "wiek": None, "poziom": 5}. 
-                    Jeśli poziom sportowy jest opisowy, przypisz wartość 1-10 (1 - nie biega, 10 - zawodowiec). 
-                    Jeśli podany wiek jest niższy niż 16 lat lub wyższy niż 100 lat - zwróć None. 
+                    Na podstawie podanego tekstu użytkownika, wyodrębnij płeć.
+                    W odpowiedzi podaj `"K"` dla kobiety lub `"M"` dla mężczyzny.
+                    Jeśli nie możesz określić płci, zwróć `null`.
+                    Odpowiedz **wyłącznie** w formacie JSON, np.:
+                    {"plec": "K"}
+                    {"plec": "M"}
+                    {"plec": null}
                 """
             },
             {"role": "user", "content": opis},
         ]
-        response = openai_client.chat.completions.create(
+        response_plec = openai_client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=messages,
+            messages=messages_plec,
             max_tokens=1000,
             temperature=0,
         )
-        result = json.loads(response.choices[0].message.content)
+        result_plec = json.loads(response_plec.choices[0].message.content)
+        plec = result_plec.get("plec", None)
+
+        # Wyodrębnij wiek
+        messages_wiek = [
+            {
+                "role": "system",
+                "content": """ 
+                    Na podstawie podanego tekstu użytkownika, wyodrębnij wiek (liczba całkowita z przedziału 16-100).
+                    Jeśli nie możesz określić wieku lub podany wiek jest poza zakresem, zwróć `null`.
+                    Odpowiedz **wyłącznie** w formacie JSON, np.:
+                    {"wiek": 25}
+                    {"wiek": null}
+                """
+            },
+            {"role": "user", "content": opis},
+        ]
+        response_wiek = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages_wiek,
+            max_tokens=1000,
+            temperature=0,
+        )
+        result_wiek = json.loads(response_wiek.choices[0].message.content)
+        wiek = result_wiek.get("wiek", None)
+
+        # Wyodrębnij poziom sportowy
+        messages_poziom = [
+            {
+                "role": "system",
+                "content": """ 
+                    Na podstawie podanego tekstu użytkownika, wyodrębnij poziom sportowy (liczba od 1 do 10).
+                    Jeśli poziom sportowy jest opisowy, przypisz wartość od 1 (początkujący) do 10 (zawodowiec).
+                    Jeśli nie możesz określić poziomu sportowego, zwróć `null`.
+                    Odpowiedz **wyłącznie** w formacie JSON, np.:
+                    {"poziom": 7}
+                    {"poziom": null}
+                """
+            },
+            {"role": "user", "content": opis},
+        ]
+        response_poziom = openai_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages_poziom,
+            max_tokens=1000,
+            temperature=0,
+        )
+        result_poziom = json.loads(response_poziom.choices[0].message.content)
+        poziom = result_poziom.get("poziom", None)
+
+        # Zwróć zebrane dane
         return {
-                "plec": result.get("plec", None),
-                "wiek": result.get("wiek", None),
-                "poziom": result.get("poziom", None),
+            "plec": plec,
+            "wiek": wiek,
+            "poziom": poziom,
         }
     except Exception:
-            return {"plec": None, "wiek": None, "poziom": None}
+        return {"plec": None, "wiek": None, "poziom": None}
 
 # Sprawdzanie, czy przycisk został naciśnięty
 if 'submitted' not in st.session_state:
