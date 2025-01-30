@@ -38,7 +38,7 @@ def generate_description(opis):
                     Brakujące informacje podaj jako 'None'. 
                     Odpowiedź w formacie JSON, wzór: {"plec": "K", "wiek": None, "poziom": 5}. 
                     Jeśli poziom sportowy jest opisowy, przypisz wartość 1-10 (1 - nie biega, 10 - zawodowiec). 
-                    Jeśli podany wiek jest niższy niż 16 lat - zwróć 16. Jeśli wiek jest wyższy niż 100 lat, zwróć 100.
+                    Jeśli podany wiek jest niższy niż 16 lat lub wyższy niż 100 lat - zwróć None. 
                 """
             },
             {"role": "user", "content": opis},
