@@ -38,6 +38,7 @@ def generate_description(opis):
                     Brakujące informacje podaj jako 'None'. 
                     Odpowiedź w formacie JSON, wzór: {"plec": "K", "wiek": None, "poziom": 5}. 
                     Jeśli poziom sportowy jest opisowy, przypisz wartość 1-10 (1 - nie biega, 10 - zawodowiec). 
+                    Jeśli podany wiek jest niższy niż 16 lat - zwróć 16. Jeśli wiek jest wyższy niż 100 lat, zwróć 100.
                 """
             },
             {"role": "user", "content": opis},
@@ -87,59 +88,59 @@ biegacze_grupy = {
 }
 
 # Przycisk, który ustawia stan 'submitted'
-if st.button("Wyślij opis do AI", disabled=not st.session_state["opis"].strip(), on_click=on_button_click, use_container_width=True):
+st.button("Wyślij opis do AI", disabled=not st.session_state["opis"].strip(), on_click=on_button_click, use_container_width=True)
 
-    # Dalszy kod, który czeka na kliknięcie przycisku
-    if st.session_state.submitted:
-        opis = st.session_state["opis"]
-        dane_biegacza = generate_description(opis)  # Przykładowa funkcja
+# Dalszy kod, który czeka na kliknięcie przycisku
+if st.session_state['submitted']:
+    opis = st.session_state["opis"]
+    dane_biegacza = generate_description(opis)  # Przykładowa funkcja
 
-        st.write(
-            "Sztuczna inteligencja jest dosyć bystra, ale jeszcze nie potafi zgadnąć wszystkiego. "
-            "Proszę sprawdź i popraw poniższe dane, a zobaczysz w jakim czasie możesz przebiec półmaraton."
-            )
+    st.write(
+        "Sztuczna inteligencja jest dosyć bystra, ale jeszcze nie potafi zgadnąć wszystkiego. "
+        "Proszę sprawdź i popraw poniższe dane, a zobaczysz w jakim czasie możesz przebiec półmaraton."
+        )
 
-        # Użytkownik wybiera dane
-        st.subheader("Sprawdź i popraw swoje dane:")
+    # Użytkownik wybiera dane
+    st.subheader("Sprawdź i popraw swoje dane:")
 
-        wiek = st.number_input("Wiek:", min_value=16, max_value=100, step=1, value=dane_biegacza["wiek"] or 32)
-        plec = st.selectbox("Płeć:", ["Kobieta", "Mężczyzna"], index=0 if dane_biegacza["plec"] == "K" else 1)
-        poziom = st.slider("Poziom wytrenowania:", min_value=1, max_value=10, value=dane_biegacza["poziom"] or 5)
+    wiek = st.number_input("Wiek:", min_value=16, max_value=100, step=1, value=dane_biegacza["wiek"] or 32)
+    plec = st.selectbox("Płeć:", ["Kobieta", "Mężczyzna"], index=0 if dane_biegacza["plec"] == "K" else 1)
+    poziom = st.slider("Poziom wytrenowania:", min_value=1, max_value=10, value=dane_biegacza["poziom"] or 5)
 
-        if wiek < 20:
-            user_category = "K20" if plec == "K" else "M20"
-        else:
-            user_category = f"K{wiek // 10 * 10}" if plec == "K" else f"M{wiek // 10 * 10}"
-
-        user_data = df[(df['Kategoria wiekowa'] == user_category) & (df['Poziom wytrenowania'] == poziom)]
-
-        # Wyniki dla użytkownika
-        if len(user_data) > 0:
-            avg_czas = user_data['Czas'].mean()
-            avg_czas_h = int(avg_czas // 3600)
-            avg_czas_m = int((avg_czas % 3600) // 60)
-            avg_czas_s = int(avg_czas % 60)
-
-            avg_5km = user_data['5 km Czas'].mean()
-            avg_5km_h = int(avg_5km // 3600)
-            avg_5km_m = int((avg_5km % 3600) // 60)
-            avg_5km_s = int(avg_5km % 60)
-
-            grupa = biegacze_grupy[poziom]
-            st.subheader(f"Według AI jesteś {grupa['nazwa']}")
-            st.write(grupa['opis'])
-
-            col1, col2 = st.columns(2)
-            with col1:
-                st.markdown("#### Przewidywany czas półmaratonu:")
-                st.metric(label="Czas maratonu", label_visibility="collapsed", value=f"{avg_czas_h:02}:{avg_czas_m:02}:{avg_czas_s:02}")
-            with col2:
-                st.markdown("#### Średni czas na pierwszych 5 km:")
-                st.metric(label="Czas na 5 km", label_visibility="collapsed", value=f"{avg_5km_h:02}:{avg_5km_m:02}:{avg_5km_s:02}")
-        else:
-            st.warning("Brak danych dla wybranego wieku, płci i poziomu wytrenowania.")
+    if wiek < 20:
+        user_category = "K20" if plec == "K" else "M20"
     else:
-        st.write("")
+        user_category = f"K{wiek // 10 * 10}" if plec == "K" else f"M{wiek // 10 * 10}"
+
+    user_data = df[(df['Kategoria wiekowa'] == user_category) & (df['Poziom wytrenowania'] == poziom)]
+
+    # Wyniki dla użytkownika
+    if len(user_data) > 0:
+        avg_czas = user_data['Czas'].mean()
+        avg_czas_h = int(avg_czas // 3600)
+        avg_czas_m = int((avg_czas % 3600) // 60)
+        avg_czas_s = int(avg_czas % 60)
+
+        avg_5km = user_data['5 km Czas'].mean()
+        avg_5km_h = int(avg_5km // 3600)
+        avg_5km_m = int((avg_5km % 3600) // 60)
+        avg_5km_s = int(avg_5km % 60)
+
+        grupa = biegacze_grupy[poziom]
+        st.subheader(f"Według AI jesteś {grupa['nazwa']}")
+        st.write(grupa['opis'])
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("#### Przewidywany czas półmaratonu:")
+            st.metric(label="Czas maratonu", label_visibility="collapsed", value=f"{avg_czas_h:02}:{avg_czas_m:02}:{avg_czas_s:02}")
+        with col2:
+            st.markdown("#### Średni czas na pierwszych 5 km:")
+            st.metric(label="Czas na 5 km", label_visibility="collapsed", value=f"{avg_5km_h:02}:{avg_5km_m:02}:{avg_5km_s:02}")
+    else:
+        st.warning("Brak danych dla wybranego wieku, płci i poziomu wytrenowania.")
+else:
+    st.write("")
 
 # Footer
 footer_style = """
